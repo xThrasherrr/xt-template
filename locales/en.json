@@ -1,0 +1,4 @@
+{
+    "load": "%s | Loaded",
+    "unload": "%s | Unloaded",
+}
