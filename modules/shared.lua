@@ -1,4 +1,4 @@
--- Redline Studios Resource Shared Modules --
+-- Shared Modules --
 QRCore = exports['qr-core']:GetCoreObject()
 sharedItems = QRCore.Shared.Items
 sharedVehicles = QRCore.Shared.Vehicles
