@@ -1,10 +1,5 @@
 -- Client Modules --
 
-QBCore = exports['qb-core']:GetCoreObject()
-
-local peds = {}
-local blips = {}
-
 -- Play Emote --
 function XTEmote(emote)
     if emote == nil then XTDebug('Play Emote Error', 'Emote is nil!') return end
@@ -29,8 +24,8 @@ function XTBlip(text, coords, icon, scale, color, setRoute)
     if icon == nil then XTDebug('Create Blip Error', 'Missing Blip Icon!') return end
     if scale == nil then XTDebug('Create Blip Error', 'Missing Blip Scale!') return end
     if color == nil then XTDebug('Create Blip Error', 'Missing Blip Color!') return end
-    local blipID = blips[#blips+1]
-    blipID = AddBlipForCoord(coords.x, coords.y, coords.z)
+
+    local blipID = AddBlipForCoord(coords.x, coords.y, coords.z)
     SetBlipSprite(blipID, icon)
     SetBlipScale(blipID, scale)
     SetBlipDisplay(blipID, 4)
@@ -55,14 +50,13 @@ function XTPed(model, coords, scenario)
     if model == nil then XTDebug('Spawn Ped Error', 'Missing Model Hash!') return end
     if coords == nil then XTDebug('Spawn Ped Error', 'Missing Spawn Coordinates!') return end
     if scenario == nil then XTDebug('Spawn Ped Error', 'Missing Ped Scenario!') return end
-    local pedId = peds[#peds+1]
 
     model = type(model) == 'string' and GetHashKey(model) or model
     RequestModel(model)
 
     while not HasModelLoaded(model) do Wait(0) end
 
-    pedId = CreatePed(0, model, coords.x, coords.y, coords.z - 1, coords.w, false, false)
+    local pedId = CreatePed(0, model, coords.x, coords.y, coords.z - 1, coords.w, false, false)
     TaskStartScenarioInPlace(pedId, scenario, 0, true)
     FreezeEntityPosition(pedId, true)
     SetEntityInvincible(pedId, true)
